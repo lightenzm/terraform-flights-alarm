@@ -4,9 +4,9 @@ data "terraform_remote_state" "site" {
   config {
     bucket = "${var.terraform_bucket}"
     key = "${var.site_module_state_path}"
+    region = "eu-west-1"
   }
 }
-
 data "template_file" "project-app_cloudconfig" {
   template = "${file("${path.module}/templates/project-app.cloudinit")}"
   vars {
@@ -104,8 +104,8 @@ resource "aws_security_group" "project-app" {
 
   ingress {
     from_port = 22
-    to_port = 2
-    protocol = "ssh"
+    to_port = 22
+    protocol = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -133,7 +133,7 @@ resource "aws_security_group" "project-app" {
 
 //???
 resource "aws_elb" "project-app" {
-  name = "${var.cluster_name}_lb"
+  name = "${var.cluster_name}-lb"
 
   subnets = [ "${data.terraform_remote_state.site.public_subnets}" ]
   security_groups = [ "${aws_security_group.project-app_lb.id}" ]
@@ -150,7 +150,7 @@ resource "aws_elb" "project-app" {
     healthy_threshold = 2
     unhealthy_threshold = 10
     timeout = 5
-    target = "TCP:8080"
+    target = "TCP:5000"
     interval = 10
   }
 

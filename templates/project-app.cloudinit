@@ -30,10 +30,9 @@ Content-Disposition: attachement; filename=02-default.x-shellscript.template
 
 #!/bin/bash
 
-VER="3.3.23"
-wget https://packages.chef.io/files/stable/chefdk/${VER}/ubuntu/18.04/chefdk_${VER}-1_amd64.deb
+wget https://packages.chef.io/files/stable/chefdk/3.3.23/ubuntu/18.04/chefdk_3.3.23-1_amd64.deb
 
-sudo dpkg -i chefdk_${VER}-1_amd64.deb
+sudo dpkg -i chefdk_3.3.23-1_amd64.deb
 mkdir -p /root/etc/chef
 mkdir /var/{log,run,cache,lib}/chef
 export AWS_ACCESS_KEY_ID=AKIA6NJOWRNIWR43AAC3

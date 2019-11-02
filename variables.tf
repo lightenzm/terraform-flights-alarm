@@ -6,7 +6,7 @@ variable "instance_type" {
 
 variable "ami" {
   description = "ami id for project-app instances"
-  default = "ami-c80b0aa2"
+  default = "ami-0c59fb6cd1d16a1ce"
 }
 
 variable "role" {
@@ -46,3 +46,7 @@ The site module is a required dependency of this module
 EOS
 
 }
+
+variable chef-resources_key {
+  default = "flightpricealarm/chef-flight-price-alarm.tar.gz"
+} 

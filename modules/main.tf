@@ -1,29 +1,20 @@
-
-// ???
-
 terraform {
-  backend "s3" {
-    bucket = "cloudschool-tf-state"
-    key = "env/terraform.tfstate" // in modules
+   backend "s3" {
+    bucket = "zohar-tf-state"
+    key = "env/terraform.tfstate"
     dynamodb_table = "tf-cloudschool-env"
-    region = "us-east-1"
+    region = "eu-west-1"
   }
 }
 
-// ???
-data "terraform_remote_state" "site" {
-  backend = "s3"
-  config {
-    bucket = "${var.terraform_bucket}"
-    key = "${var.site_module_state_path}"
-  }
+provider "aws" {
+  region = "eu-west-1"
 }
+
 
 module "clouschool-app" {
   source = "../"
   // ???
-  terraform_bucket = "${var.terraform_bucket}"
-  site_module_state_path = "${var.site_module_state_path}"
   instance_type = "t2.micro"
-  exchange_cluster_size = 2
+  chef-resources_key = "flightpricealarm/chef-flight-price-alarm.tar.gz"
 }
