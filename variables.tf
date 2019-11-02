@@ -18,7 +18,7 @@ variable "cluster_name" {
 }
 
 variable "project-app_cluster_size_min" {
-  default = 2
+  default = 0
 }
 
 variable "project-app_cluster_size_max" {

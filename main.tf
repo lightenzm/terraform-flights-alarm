@@ -125,8 +125,8 @@ resource "aws_security_group" "project-app" {
     from_port = 5000
     to_port = 5000
     protocol = "tcp"
-   /* cidr_blocks = ["0.0.0.0/0"]*/
-    security_groups = [ "${aws_security_group.project-app_lb.id}" ]
+    cidr_blocks = ["0.0.0.0/0"]
+   # security_groups = [ "${aws_security_group.project-app_lb.id}" ]
   }
   
 }
@@ -156,23 +156,36 @@ resource "aws_elb" "project-app" {
 
 }
 
-/*
-resource "aws_security_group" "rds-mysql-db"
-???
-*/
+
+resource "aws_security_group" "rds-mysql-db" {
+    ingress {
+    from_port = 3306
+    to_port = 3306
+    protocol = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 
 # resource "aws_db_instance" "rds-mysql-db" {
 #   multi_az = false
-#   db_subnet_group_name = "${data.terraform_remote_state.site.public_subnets}"
+#   db_subnet_group_name = "${data.terraform_remote_state.site.public_subnets[0]}"
 #   apply_immediately = true
 #    // ???
 #   identifier = "project-app-db"
 #   engine = "mysql"
 #   engine_version = "5.7.25"
 #   instance_class = "db.t2.micro"
-#   name = "project-app"
-#   password = "fVWZ4QG8hG"
-#   username = "project-app"
+#   name = "flightsAlarm"
+#   password = "zohar12345"
+#   username = "admin"
 #   storage_type = "standard"
 #   allocated_storage = "20"
 #   availability_zone = "us-east-1c"
