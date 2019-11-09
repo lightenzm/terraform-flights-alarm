@@ -174,24 +174,24 @@ resource "aws_security_group" "rds-mysql-db" {
 }
 
 
-# resource "aws_db_instance" "rds-mysql-db" {
-#   multi_az = false
-#   db_subnet_group_name = "${data.terraform_remote_state.site.public_subnets[0]}"
-#   apply_immediately = true
-#    // ???
-#   identifier = "project-app-db"
-#   engine = "mysql"
-#   engine_version = "5.7.25"
-#   instance_class = "db.t2.micro"
-#   name = "flightsAlarm"
-#   password = "zohar12345"
-#   username = "admin"
-#   storage_type = "standard"
-#   allocated_storage = "20"
-#   availability_zone = "us-east-1c"
-#   vpc_security_group_ids = [ "${aws_security_group.rds-mysql-db.id}" ]
+resource "aws_db_instance" "rds-mysql-db" {
+  multi_az = false
+  db_subnet_group_name = "default"
+  apply_immediately = true
+  identifier = "flight-price-alarm-db"
+  publicly_accessible  = true
+  engine = "mysql"
+  engine_version = "5.7.25"
+  instance_class = "db.t2.micro"
+  name = "flightsAlarm"
+  password = "Loklok31"
+  username = "zohar"
+  storage_type = "standard"
+  allocated_storage = "20"
+  availability_zone = "eu-west-1a"
+  vpc_security_group_ids = [ "${aws_security_group.rds-mysql-db.id}" ]
   
-# }
+}
 
 # //???
 # resource "aws_s3_bucket" "project-app-deploy_bucket" {
