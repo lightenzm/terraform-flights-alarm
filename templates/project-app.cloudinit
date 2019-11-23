@@ -39,7 +39,7 @@ export AWS_ACCESS_KEY_ID=AKIA6NJOWRNIWR43AAC3
 export AWS_SECRET_ACCESS_KEY=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
 export AWS_DEFAULT_REGION=eu-west-1 
 sudo apt-get install -y awscli
-sudo apt-get install python-pip
+sudo apt-get install -y python-pip
 
 aws s3 cp s3://${chef-resources_key} /tmp/${chef-resources_key}
 tar -zxvf /tmp/${chef-resources_key} -C /root/etc/chef/

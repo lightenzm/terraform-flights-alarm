@@ -178,10 +178,10 @@ resource "aws_db_instance" "rds-mysql-db" {
   multi_az = false
   db_subnet_group_name = "default"
   apply_immediately = true
-  identifier = "flight-price-alarm-db"
+  identifier = "project-app-db"
   publicly_accessible  = true
   engine = "mysql"
-  engine_version = "5.7.25"
+  engine_version = "5.7.26"
   instance_class = "db.t2.micro"
   name = "flightsAlarm"
   password = "Loklok31"
